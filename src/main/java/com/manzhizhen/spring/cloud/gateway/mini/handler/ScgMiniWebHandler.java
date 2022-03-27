@@ -15,6 +15,9 @@ import reactor.core.publisher.Mono;
  * <p>
  * from FilteringWebHandler
  *
+ * The org.springframework.web.server package builds on the HttpHandler contract to provide a general-purpose web API for processing requests through a chain of
+ * multiple WebExceptionHandler, multiple WebFilter, and a single WebHandler component.
+ *
  * @author: yizhenqiang
  * @date: 2022/3/26 12:35 上午
  */

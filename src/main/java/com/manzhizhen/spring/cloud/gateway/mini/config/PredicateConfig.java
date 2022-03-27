@@ -16,6 +16,12 @@ import org.springframework.web.server.ServerWebExchange;
 @Configuration
 public class PredicateConfig {
 
+    /**
+     * HTTP HEADER 中有mzz这个key则匹配这个谓词
+     *
+     * @param firstRoute
+     * @return
+     */
     @Bean
     public Predicate myFirstPredicate(@Qualifier("myFirstRoute") final Route firstRoute) {
         return new Predicate() {
@@ -36,6 +42,12 @@ public class PredicateConfig {
         };
     }
 
+    /**
+     * 查询参数中包含mzz这个key则匹配这个谓词
+     *
+     * @param secondRoute
+     * @return
+     */
     @Bean
     public Predicate mySecondPredicate(@Qualifier("mySecondRoute") final Route secondRoute) {
         return new Predicate() {
@@ -56,12 +68,18 @@ public class PredicateConfig {
         };
     }
 
+    /**
+     * 查询参数包含love则匹配这个谓词
+     *
+     * @param thirdRoute
+     * @return
+     */
     @Bean
     public Predicate myThirdPredicate(@Qualifier("myThirdRoute")final Route thirdRoute) {
         return new Predicate() {
             @Override
             public boolean match(ServerWebExchange exchange) {
-                return exchange.getRequest().getPath().toString().startsWith("/mzz");
+                return exchange.getRequest().getQueryParams().containsKey("love");
             }
 
             @Override

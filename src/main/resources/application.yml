@@ -1,0 +1,11 @@
+spring:
+  consul:
+    host: localhost
+    port: 8500
+  cloud:
+    gateway:
+      mini:
+        httpclient:
+          connectTimeout: 1000
+          responseTimeout: 5000
+

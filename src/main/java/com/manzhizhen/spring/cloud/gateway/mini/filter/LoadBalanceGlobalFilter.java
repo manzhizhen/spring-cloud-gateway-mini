@@ -40,7 +40,7 @@ public class LoadBalanceGlobalFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        URI requestUri = exchange.getRequest().getURI();
+        URI requestUri = exchange.getRequiredAttribute(GATEWAY_REQUEST_URL_ATTR);
         String scheme = requestUri.getScheme();
         if (!"lb".equals(scheme)) {
             // 如果不是lb的scheme，就下一个
@@ -117,6 +117,6 @@ public class LoadBalanceGlobalFilter implements GlobalFilter {
 
     @Override
     public int getOrder() {
-        return 100;
+        return 20000;
     }
 }

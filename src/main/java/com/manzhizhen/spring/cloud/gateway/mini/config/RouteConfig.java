@@ -34,10 +34,14 @@ public class RouteConfig {
         }
     }
 
+    /**
+     * 这里演示使用 Consul + LoadBalance 来发现和调用下游服务 spring-cloud-openfeign-provider
+     * @return
+     */
     @Bean
     public Route myThirdRoute() {
         try {
-            return new Route("3", new URI("http://localhost:8083"), new HashMap<>());
+            return new Route("3", new URI("lb://spring-cloud-openfeign-provider"), new HashMap<>());
         } catch (URISyntaxException e) {
             throw new IllegalStateException(e);
         }
