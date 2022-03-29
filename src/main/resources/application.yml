@@ -1,9 +1,6 @@
 spring:
   application:
     name: spring-cloud-gateway-mini
-  consul:
-    discovery:
-      enabled: true
   cloud:
     gateway:
       mini:
