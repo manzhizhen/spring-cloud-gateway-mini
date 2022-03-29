@@ -26,7 +26,7 @@ spring:
 The above configuration indicates that we have a Consul service locally.
 ### 2.配置路由
 其实mini并没有实现SCG配置路由的能力，所以这块其实是需要在mini中编码实现，例如，在 **RouteConfig** 中的如下代码代码演示了如何创建一个通过负载均衡到达名为 *spring-cloud-openfeign-provider* 服务的路由：<br >
-In fact, mini does not have the ability to configure SCG routes, so it needs to be coded in mini. For example, the following code in * * routeconfig * * demonstrates how to create a route to the service named *spring-cloud-openfeign-provider* through load balancing:
+In fact, mini does not have the ability to configure SCG routes, so it needs to be coded in mini. For example, the following code in **RouteConfig** demonstrates how to create a route to the service named *spring-cloud-openfeign-provider* through load balancing:
 ```java
     @Bean
     public Route myThirdRoute() {
