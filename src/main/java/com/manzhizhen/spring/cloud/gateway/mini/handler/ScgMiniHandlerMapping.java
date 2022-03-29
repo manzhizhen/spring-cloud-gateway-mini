@@ -69,4 +69,9 @@ public class ScgMiniHandlerMapping extends AbstractHandlerMapping {
         return out.toString();
     }
 
+    @Override
+    public int getOrder() {
+        return super.getOrder() - 100;
+    }
+
 }

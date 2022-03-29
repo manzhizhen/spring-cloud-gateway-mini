@@ -1,11 +1,14 @@
 spring:
+  application:
+    name: spring-cloud-gateway-mini
   consul:
-    host: localhost
-    port: 8500
+    discovery:
+      enabled: true
   cloud:
     gateway:
       mini:
         httpclient:
           connectTimeout: 1000
           responseTimeout: 5000
-
+  config:
+    import: optional:consul:localhost:8500

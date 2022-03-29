@@ -72,6 +72,9 @@ public class LoadBalanceGlobalFilter implements GlobalFilter {
                     // 修改 URI 以将请求重定向到选择的服务实例
                     URI requestUrl = reconstructURI(serviceInstance, requestUri);
 
+                    // 这里需要把lb（如有）替换成 http 或 https，为了简单起见，就替换成http
+                    requestUrl = "lb".equals(requestUri.getScheme()) ? URI.create(requestUrl.toString().replaceFirst("lb", "http")) : requestUrl;
+
                     exchange.getAttributes().put(GATEWAY_REQUEST_URL_ATTR, requestUrl);
                     exchange.getAttributes().put(GATEWAY_LOADBALANCER_RESPONSE_ATTR, response);
 

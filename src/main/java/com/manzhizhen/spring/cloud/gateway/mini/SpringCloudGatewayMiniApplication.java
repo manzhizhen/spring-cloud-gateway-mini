@@ -4,9 +4,11 @@ import com.manzhizhen.spring.cloud.gateway.mini.config.HttpClientProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.web.reactive.config.EnableWebFlux;
 
-@EnableWebFlux
+
+/**
+ * curl -XPOST http://localhost:8080/manzhizhen/openfeign/queryBaseInfo?love=ch --header 'Content-Type: application/json' --data-raw '{"orderId":"sdfafsdfsdfaf"}'
+ */
 @EnableConfigurationProperties(HttpClientProperties.class)
 @SpringBootApplication
 public class SpringCloudGatewayMiniApplication {
