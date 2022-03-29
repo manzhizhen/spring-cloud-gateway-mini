@@ -1,8 +1,8 @@
 # spring-cloud-gateway-mini
 
 ## 背景（Background）
-为了帮助广大Spring Cloud Gateway爱好者更方便的学习SCG，了解spring-webflux和reactor-netty的使用，特意精简了SCG，保留了最核心的代码实现（只有2千多行代码），所以此项目叫做 "spring-cloud-gateway-mini"。spring-cloud-gateway-mini 只有2千多行代码
-In order to help Spring Cloud Gateway enthusiasts learn SCG more conveniently and understand the use of spring-webflux and reactor-netty, SCG is deliberately simplified and the core code implementation is retained（just over 2,000 lines of code）, so this project is called "spring-cloud-gateway-mini".
+为了帮助广大Spring Cloud Gateway爱好者更方便的学习SCG，了解spring-webflux和reactor-netty的使用，特意精简了SCG，保留了最核心的代码实现（只有2千多行代码），所以此项目叫做 **spring-cloud-gateway-mini**。
+In order to help Spring Cloud Gateway enthusiasts learn SCG more conveniently and understand the use of spring-webflux and reactor-netty, SCG is deliberately simplified and the core code implementation is retained（just over 2,000 lines of code）, so this project is called **spring-cloud-gateway-mini**.
 
 ## 使用方法（Instruction Manual）
 ### 1.配置注册中心
