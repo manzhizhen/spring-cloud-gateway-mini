@@ -15,8 +15,8 @@ Since we depend on Consul in our pom.xml, we use Consul as the registry by defau
             <version>3.1.0</version>
         </dependency>
 ```
-如果我们用的是Consul，那么还需要修改 **resource/application.yml** 文件中的配置，配置成正确的Consul地址，相关配置如下：<br >
-If we are using Consul, we also need to modify the configuration in the **resource/application.yml** file to configure the correct Consul address. The relevant configuration is as follows:
+如果我们用的是Consul，那么还需要修改 **resources/application.yml** 文件中的配置，配置成正确的Consul地址，相关配置如下：<br >
+If we are using Consul, we also need to modify the configuration in the **resources/application.yml** file to configure the correct Consul address. The relevant configuration is as follows:
 ```yaml
 spring:
   config:
