@@ -25,6 +25,7 @@ import io.netty.handler.codec.http.HttpMethod;
 import java.net.URI;
 import java.time.Duration;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,7 @@ import org.springframework.http.server.reactive.AbstractServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.http.server.reactive.ServerHttpResponseDecorator;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
@@ -67,6 +69,21 @@ public class NettyGlobalFilter implements GlobalFilter {
 
     @Autowired(required = false)
     private List<HttpHeadersFilter> headersFilters;
+
+    /**
+     * 注意，默认的SCG实现里调用下游的HttpClient和处理请求事件轮线程是共用的，但有时候将调用下游的HttpClient绑定一个单独的线程池是有一定性能提升的，大家可以试试
+     */
+    private ThreadPoolTaskExecutor httpClientThreadPoolTaskExecutor;
+
+    @PostConstruct
+    public void init() {
+        httpClientThreadPoolTaskExecutor = new ThreadPoolTaskExecutor();
+        httpClientThreadPoolTaskExecutor.setCorePoolSize(6);
+        httpClientThreadPoolTaskExecutor.setMaxPoolSize(6);
+        httpClientThreadPoolTaskExecutor.setQueueCapacity(100);
+        httpClientThreadPoolTaskExecutor.setThreadNamePrefix("yzq-test-");
+        httpClientThreadPoolTaskExecutor.initialize();
+    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
@@ -165,7 +182,9 @@ public class NettyGlobalFilter implements GlobalFilter {
                             th -> new ResponseStatusException(HttpStatus.GATEWAY_TIMEOUT, th.getMessage(), th));
         }
 
-        return responseFlux.then(chain.filter(exchange));
+        return responseFlux
+               // .publishOn(Schedulers.fromExecutor(httpClientThreadPoolTaskExecutor))  注意，有时候将 responseFlux 用另一个线程池来跑会有一定性能提升（默认是共用处理请求的线程）
+                .then(chain.filter(exchange));
     }
 
     static Integer getInteger(Object connectTimeoutAttr) {
