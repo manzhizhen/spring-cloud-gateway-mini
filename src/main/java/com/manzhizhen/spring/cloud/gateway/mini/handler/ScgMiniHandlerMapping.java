@@ -13,6 +13,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
+ * 该类可以说是SCG自定义类的总入口，由Spring WebFlux 的 DispatcherHandler 来调用，而 DispatcherHandler 内部的处理流程如下：
+ * 1.Each HandlerMapping is asked to find a matching handler, and the first match is used.
+ * 2.If a handler is found, it is run through an appropriate HandlerAdapter, which exposes the return value from the execution as HandlerResult.
+ * 3. The HandlerResult is given to an appropriate HandlerResultHandler to complete processing by writing to the response directly or by using a view to render.
+ *
  * from RoutePredicateHandlerMapping
  *
  * @author: yizhenqiang
